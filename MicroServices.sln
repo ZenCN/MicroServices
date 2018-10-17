@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServices", "MicroServices\MicroServices.csproj", "{58960A17-4C46-4C28-AFC8-4BA2A75509CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAccess", "DbAccess\DbAccess.csproj", "{46FE274A-76D2-4FBB-89C0-A87F87E695DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58960A17-4C46-4C28-AFC8-4BA2A75509CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58960A17-4C46-4C28-AFC8-4BA2A75509CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58960A17-4C46-4C28-AFC8-4BA2A75509CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58960A17-4C46-4C28-AFC8-4BA2A75509CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FE274A-76D2-4FBB-89C0-A87F87E695DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FE274A-76D2-4FBB-89C0-A87F87E695DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FE274A-76D2-4FBB-89C0-A87F87E695DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FE274A-76D2-4FBB-89C0-A87F87E695DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
