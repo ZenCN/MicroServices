@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MicroServices</RootNamespace>
     <AssemblyName>MicroServices</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="QueryScripts\ReadVehcileBatteryInfo.txt" />
+    <Content Include="UpdatedLogs\README.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -175,7 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UpdatedLogs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbAccess\DbAccess.csproj">

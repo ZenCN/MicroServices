@@ -47,7 +47,7 @@ namespace MicroServices
                             sql = "";
                             string str = "";
                             int count = 0;
-                            fs = new FileStream(AppContext.BaseDirectory + "\\UpdatedLogs\\" + DateTime.Now.ToString("yy-MM-dd HH.mm.ss") + ".txt", FileMode.Create, FileAccess.Write);
+                            fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "\\UpdatedLogs\\" + DateTime.Now.ToString("yy-MM-dd HH.mm.ss") + ".txt", FileMode.Create, FileAccess.Write);
                             sw = new StreamWriter(fs);
                             if (_reader.HasRows)
                             {

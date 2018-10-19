@@ -55,7 +55,7 @@ namespace MicroServices
         /// </summary>
         public void task()
         {
-            Job<QueryJob>("query", "0/8 * * * * ? "); //corn规则  "
+            Job<QueryJob>("query", "0/10 * * * * ? "); //corn规则  "
             //Job<QueryJob>("query", "0 15 9 * * ? ");
         }
 
