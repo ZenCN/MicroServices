@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MicroServices
+namespace DbQuery
 {
     [CLSCompliant(false)]
     public class Scheduler
@@ -55,7 +55,7 @@ namespace MicroServices
         /// </summary>
         public void task()
         {
-            Job<QueryJob>("query", "0/10 * * * * ? "); //corn规则  "
+            Job<WriteBatterySnInDmsFromMes>("query", "0/10 * * * * ? "); //corn规则  "
             //Job<QueryJob>("query", "0 15 9 * * ? ");
         }
 

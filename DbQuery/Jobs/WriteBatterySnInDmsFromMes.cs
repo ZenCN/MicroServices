@@ -1,5 +1,4 @@
 ﻿using DbAccess;
-using MicroServices.Controllers;
 using Oracle.ManagedDataAccess.Client;
 using Quartz;
 using System;
@@ -11,10 +10,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace MicroServices
+namespace DbQuery
 {
     [CLSCompliant(false)]
-    public class QueryJob : IJob
+    public class WriteBatterySnInDmsFromMes : IJob
     {
         public Task Execute(IJobExecutionContext context)
         {

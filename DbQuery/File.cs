@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace MicroServices
+namespace DbQuery
 {
     public class File
     {

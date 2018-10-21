@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DbQuery;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -23,7 +24,8 @@ namespace MicroServices.Controllers
             string msg = "Do Nothing ...";
             Scheduler scheduler = new Scheduler();
 
-            switch (action) {
+            switch (action)
+            {
                 case "start":
                     scheduler.Start();
                     msg = "Scheduler Is Working";
@@ -35,7 +37,7 @@ namespace MicroServices.Controllers
                 default:
                     break;
             }
-            
+
             return Ok(msg);
         }
     }

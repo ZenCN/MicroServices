@@ -128,7 +128,7 @@ namespace MicroServices.App_Start
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<VehcileService>().As<IVehcileService>();
+            //builder.RegisterType<VehcileService>().As<IVehcileService>();
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
