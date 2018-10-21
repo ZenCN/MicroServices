@@ -12,14 +12,13 @@ using System.Web;
 
 namespace DbQuery
 {
-    [CLSCompliant(false)]
     public class WriteBatterySnInDmsFromMes : IJob
     {
         public Task Execute(IJobExecutionContext context)
         {
             Task task = new Task(() =>
             {
-                Db cfdms = new Db(ConfigurationManager.ConnectionStrings["CFDMSDB"].ToString(), ConnectionType.Sql);
+                DbHelper cfdms = new DbHelper(ConfigurationManager.ConnectionStrings["CFDMSDB"].ToString(), ConnectionType.Sql);
                 try
                 {
                     SqlDataReader reader = cfdms.GetDataReader("select top 500 vin from hp_vehicle where classid in('e1','e2') and querybatterysndate = '1990-1-1'", true);
@@ -37,7 +36,7 @@ namespace DbQuery
                         string sql = File.ReadSql("ReadVehcileBatteryInfo");
                         sql = sql.Replace("@VIN", vins);
 
-                        Db mesdb = new Db(ConfigurationManager.ConnectionStrings["MesDb"].ToString(), ConnectionType.Oracle);
+                        DbHelper mesdb = new DbHelper(ConfigurationManager.ConnectionStrings["MesDb"].ToString(), ConnectionType.Oracle);
                         FileStream fs = null;
                         StreamWriter sw = null;
                         try

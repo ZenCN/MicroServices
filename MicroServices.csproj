@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MicroServices</RootNamespace>
     <AssemblyName>MicroServices</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -144,6 +144,7 @@
   <ItemGroup>
     <Compile Include="App_Start\ApiConfig.cs" />
     <Compile Include="App_Start\ApiExceptionHandler.cs" />
+    <Compile Include="Controllers\GetVehicleStockController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

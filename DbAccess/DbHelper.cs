@@ -9,7 +9,7 @@ using System.IO;
 
 namespace DbAccess
 {
-    public class Db
+    public class DbHelper
     {
         /// <summary>
         /// 数据库连接字符串
@@ -28,7 +28,7 @@ namespace DbAccess
         /// Db构造方法
         /// </summary>
         /// <param name="connection_str">数据库连接字符串</param>
-        public Db(string connection_str, ConnectionType connection_type)
+        public DbHelper(string connection_str, ConnectionType connection_type)
         {
             this.connection_str = connection_str;
             this.connection_type = connection_type;

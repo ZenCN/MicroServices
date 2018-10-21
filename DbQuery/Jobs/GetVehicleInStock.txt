@@ -1,0 +1,67 @@
+﻿Select Distinct QueryA.*, QueryB.SalesId, QueryB.HP_SAPSalesId, QueryB.InventDimId, QueryB.HP_Remark, QueryB.SalesName, QueryB.SalesStatus, QueryB.HP_DealerOrderStatus, QueryB.HP_DeliveryTime, QueryB.ReceiptDateConfirmed Into #Temp
+From(
+    Select InventDim.InventSerialId, InventSum.AvailPhysical, 
+	         DirPartyTable.DataArea, DirPartyTable.HP_DistrictId, DirPartyTable.HP_StateId, DirPartyTable.Name,
+           HP_Vehicle.CertifiCationno, HP_Vehicle.Engine, 
+		       InventTable.HP_BrandID, InventTable.HP_ClassID, InventTable.HP_ModelID, InventTable.HP_ECId,InventTable.ItemId,
+		       HP_ExteriorColor.ColorName
+		   
+    From   InventDim Inner Join InventSum On InventDim.InventDimId = InventSum.InventDimId
+           Inner Join InventTable On InventSum.ItemId = InventTable.ItemId And InventTable.DataAreaID = 'CF10'
+           Inner Join DirPartyTable On InventDim.DataAreaID = DirPartyTable.DataArea  
+           Inner Join HP_Vehicle On HP_Vehicle.VIN = InventDim.InventSerialId
+           Inner Join HP_ExteriorColor On InventTable.HP_ECID = HP_ExteriorColor.ECId
+		   
+    Where  InventSum.AvailPhysical > 0 And InventDim.InventSerialId <> ''
+					 And DirPartyTable.DataArea In(Select DataArea From DirPartyTable Where Name like '%湖南长丰汽车服务有限责任公司%分公司%' And DataArea > '5000')
+) QueryA Inner Join (
+Select SL.SalesID, SL.HP_SAPSalesID, SL.InventDimId, SL.HP_Remark, S.SalesStatus,
+       S.SalesName, S.HP_DealerOrderStatus, S.HP_VIN, S.HP_DeliveryTime, S.ReceiptDateConfirmed, I.InventSerialId
+From   SalesTable As S Inner Join SalesLine As SL On S.SalesID = SL.SalesID
+                       Inner Join PurchTable As P On S.InterCompanyPurchId = P.PurchId
+											 Inner Join InventDim As I On I.InventDimId = SL.InventDimId
+											 Inner Join DirPartyTable As D On S.InterCompanyCompanyId = D.DataArea
+Where  S.HP_DealerOrderStatus = 8
+       And S.DataAreaID = 'CF10'
+			 And S.HP_VehicleHeadReturnStatus = 0
+			 And S.SalesStatus <> 4
+			 And P.PurchStatus <> 4
+			 And P.HP_OrderClass <> 2
+			 And P.HP_PurchIdRef = ''
+			 And D.Name like '%湖南长丰汽车服务有限责任公司%分公司%' 
+			 And D.DataArea > '5000'
+) QueryB On (QueryA.InventSerialId = QueryB.InventSerialId And QueryA.Name = QueryB.SalesName)
+
+Select SalesID, SalesName, HP_ModelID, InventSerialId As HP_VIN, ColorName As HP_ColorName, HP_DeliveryTime,
+Case SalesStatus When 1 Then '未结订单' When 2 Then '已交货' When 3 Then '已开票' When 4 Then '已取消' Else ' ' End As SalesStatus,
+Case HP_DealerOrderStatus When 0 Then '订单创建'  When 1 Then '审核通过' When 2 Then '资金冻结' When 3 Then '配车成功' When 4 Then '物流分配' When 5 Then '待发运' When 6 Then '已调度' 
+When 7 Then '在途' When 8 Then '经销商入库' When 9 Then '销售退货' When 10 Then '销售换货' Else '' End As HP_DealerOrderStatus, 
+ReceiptDateConfirmed Into #Result From #Temp
+
+Insert Into #Result
+
+Select S.SalesID, S.SalesName, L.HP_ModelID, S.HP_VIN, S.HP_ColorName, S.HP_DeliveryTime,
+Case S.SalesStatus When 1 Then '未结订单' When 2 Then '已交货' When 3 Then '已开票' When 4 Then '已取消' Else ' ' End As SalesStatus,
+Case S.HP_DealerOrderStatus When 0 Then '订单创建'  When 1 Then '审核通过' When 2 Then '资金冻结' When 3 Then '配车成功' When 4 Then '物流分配' When 5 Then '待发运' When 6 Then '已调度' 
+When 7 Then '在途' When 8 Then '经销商入库' When 9 Then '销售退货' When 10 Then '销售换货' Else '' End As HP_DealerOrderStatus, S.ReceiptDateConfirmed
+From   SalesTable As S 
+		   Inner Join SalesLine As L On S.SalesID = L.SalesID 
+			 Inner Join PurchTable As P On S.InterCompanyPurchId = P.PurchId
+			 Inner Join DirPartyTable As D On S.InterCompanyCompanyId = D.DataArea
+Where  S.HP_DealerOrderStatus Between 3 And 7
+			 And S.DataAreaID = 'CF10'
+			 And S.HP_VehicleHeadReturnStatus = 0
+			 And S.SalesStatus <> 4
+			 And P.PurchStatus <> 4
+			 And P.HP_OrderClass <> 2
+			 And P.HP_PurchIdRef = ''
+			 And S.HP_DeliveryTime > '2014-01-01'
+			 And D.Name like '%湖南长丰汽车服务有限责任公司%分公司%' 
+			 And D.DataArea > '5000'
+Group By  S.SalesID, S.SalesName, L.HP_ModelID, S.HP_VIN, S.HP_ColorName, S.HP_DeliveryTime, S.SalesStatus, S.HP_DealerOrderStatus, S.ReceiptDateConfirmed
+Having Sum(L.Salesqty) > 0
+
+Select * From #Result
+
+Drop Table #Temp
+Drop Table #Result;

@@ -7,7 +7,6 @@ using System.Web;
 
 namespace DbQuery
 {
-    [CLSCompliant(false)]
     public class Scheduler
     {
         private static IScheduler scheduler;
@@ -29,7 +28,7 @@ namespace DbQuery
         public void Start()
         {
             Current.Start();
-            task();
+            Task();
         }
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace DbQuery
         /// <summary>
         /// 任务
         /// </summary>
-        public void task()
+        public void Task()
         {
             Job<WriteBatterySnInDmsFromMes>("query", "0/10 * * * * ? "); //corn规则  "
             //Job<QueryJob>("query", "0 15 9 * * ? ");
